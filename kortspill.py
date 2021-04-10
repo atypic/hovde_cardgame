@@ -1,7 +1,7 @@
 import numpy as np
 from joblib import Parallel, delayed
 
-num_games = 1
+num_games = 1000000
 
 def play_game():
     game_won = 0
@@ -14,10 +14,10 @@ def play_game():
         if len(deck) == 0:
             game_won = 1
             game_over = True
-        drawn = np.random.choice(deck, replace=False)
+            continue
         drawn = deck[-1]
         deck = deck[0:-1]
-        print(deck)
+        #print(deck)
         if drawn == n:
             n = 0
         n += 1
