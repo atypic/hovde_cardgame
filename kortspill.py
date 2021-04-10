@@ -8,21 +8,25 @@ def play_game():
     deck = np.asarray([[x for x in range(1,14)] for _ in range(4)]).flatten()
     #assert len(deck) == 52, "Erk, wrong deck size"
     np.random.shuffle(deck)
-    game_over = False
     n = 1
-    while not game_over:
-        if len(deck) == 0:
-            game_won = 1
-            game_over = True
-            continue
+    while True:
         drawn = deck[-1]
         deck = deck[0:-1]
-        #print(deck)
-        if drawn == n:
-            n = 0
-        n += 1
+        
         if n == 13:
-            game_over = True
+            break
+        
+        #we are out of cards. 
+        if len(deck) == 0:
+            if drawn == n:
+                game_won = 1
+            break
+        
+        if drawn == n:
+            #we hit, reset counter
+            n = 1
+        else:
+            n += 1
 
     return game_won
 
